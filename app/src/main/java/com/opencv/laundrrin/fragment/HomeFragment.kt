@@ -5,9 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.inyongtisto.tokoonline.adapter.AdapterSlider
 import com.opencv.laundrrin.R
+import com.opencv.laundrrin.adapter.AdapterList
+import com.opencv.laundrrin.model.model_kupon
+import com.opencv.laundrrin.model.model_paket
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,6 +31,7 @@ class HomeFragment : Fragment() {
     private var param2: String? = null
 
     lateinit var vpSlider:ViewPager
+    lateinit var rvList:RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +48,7 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view: View=inflater.inflate(R.layout.fragment_home, container, false)
         vpSlider=view.findViewById(R.id.vp_slider)
+        rvList=view.findViewById(R.id._rvkategori)
         val arrSlider=ArrayList<Int>()
         arrSlider.add(R.drawable.bg1)
         arrSlider.add(R.drawable.bg2)
@@ -49,7 +57,32 @@ class HomeFragment : Fragment() {
         val adapterSlider=AdapterSlider(arrSlider,activity)
         vpSlider.adapter=adapterSlider
 
+        val LayoutManager= LinearLayoutManager(activity)
+        LayoutManager.orientation=LinearLayoutManager.HORIZONTAL
+
+        rvList.adapter=AdapterList(arrPaket)
+        rvList.layoutManager=LayoutManager
+
         return view
+    }
+    val arrPaket:ArrayList<model_paket>get() {
+        val arr=ArrayList<model_paket>()
+        val p1=model_paket()
+        p1.id=1
+        p1.harga_paket=100000
+        p1.nama_paket="cuci kering"
+        p1.jenis_paket="paket apalah"
+
+        val p2=model_paket()
+        p2.id=1
+        p2.harga_paket=100000
+        p2.nama_paket="cuci kering"
+        p2.jenis_paket="paket apalah"
+
+        arr.add(p1)
+        arr.add(p2)
+
+        return arr
     }
 
     companion object {

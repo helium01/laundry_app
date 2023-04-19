@@ -14,6 +14,9 @@ import com.opencv.laundrrin.fragment.PemasukanFragment
 import com.opencv.laundrrin.fragment.PembayaranFragment
 import com.opencv.laundrrin.fragment.PetaFragment
 import com.opencv.laundrrin.fragment.ProgressFragment
+import com.opencv.laundrrin.model.PaketService
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -83,6 +86,16 @@ class MainActivity : AppCompatActivity() {
         menuitem.isChecked=true
         fm.beginTransaction().hide(active).show(fragment).commit()
         active = fragment
+    }
+
+    object RetrofitClient {
+        private const val BASE_URL = "https://api.example.com/"
+        private val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val userService = retrofit.create(PaketService::class.java)
     }
 }
 
