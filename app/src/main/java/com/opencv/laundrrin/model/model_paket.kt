@@ -8,6 +8,7 @@ class model_paket : Serializable {
     lateinit var nama_paket: String
     var harga_paket: Int=0
     lateinit var jenis_paket: String
+    var image_paket: Int=0
 }
 interface PaketService {
     @GET("users")

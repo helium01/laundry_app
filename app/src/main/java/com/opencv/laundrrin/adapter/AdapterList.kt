@@ -3,6 +3,8 @@ package com.opencv.laundrrin.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.opencv.laundrrin.R
 import com.opencv.laundrrin.model.model_paket
@@ -11,10 +13,15 @@ class AdapterList(val data: List<model_paket>): RecyclerView.Adapter<AdapterList
 
     // code untuk membuat ViewHolder dan menampilkan data ke dalam ViewHolder
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+        val tvnama_paket=itemView.findViewById<TextView>(R.id.nama_list)
+        val tvjenis_paket=itemView.findViewById<TextView>(R.id.jenis_list)
+        val tvharga_paket=itemView.findViewById<TextView>(R.id.harga_list)
+        val imgpaket=itemView.findViewById<ImageView>(R.id.foto_list)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view: View=LayoutInflater.from(parent.context).inflate(R.layout.fragment_home, parent, false)
+        val view: View=LayoutInflater.from(parent.context).inflate(R.layout.item_List, parent, false)
         return ViewHolder(view)
     }
 
@@ -24,6 +31,11 @@ class AdapterList(val data: List<model_paket>): RecyclerView.Adapter<AdapterList
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.tvnama_paket.text=data[position].nama_paket
+        holder.tvjenis_paket.text=data[position].jenis_paket
+        holder.tvharga_paket.text=data[position].harga_paket.toString()
+        holder.imgpaket.setImageResource(data[position].image_paket)
+
 
     }
 }
